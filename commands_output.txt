@@ -1,0 +1,37 @@
+R1#show ip route
+
+C 192.168.12.0/24 is directly connected, FastEthernet0/0
+1.0.0.0/8 is variably subnetted, 2 subnets, 2 masks
+O 2.2.2.2/32 [110/2] via 192.168.12.2, 00:00:14, FastEthernet0/0
+C 1.1.1.0/24 is directly connected, Loopback0
+
+
+R2#show ip route
+
+C 192.168.12.0/24 is directly connected, FastEthernet0/0
+2.0.0.0/24 is subnetted, 1 subnets
+C 2.2.2.0 is directly connected, Loopback0
+
+
+R1#show ip ospf interface loopback 0
+%OSPF: OSPF not enabled on Loopback0
+
+
+R2#show ip ospf interface loopback 0
+Loopback0 is up, line protocol is up
+Internet Address 2.2.2.2/24, Area 0
+Process ID 1, Router ID 2.2.2.2, Network Type LOOPBACK, Cost: 1
+Loopback interface is treated as a stub Host
+
+
+R1#show ip protocols | begin Networks
+Routing for Networks:
+10.1.1.1 0.0.0.0 area 0
+192.168.12.0 0.0.0.255 area 0
+
+
+R1#show run | section router ospf
+router ospf 1
+log-adjacency-changes
+network 10.1.1.1 0.0.0.0 area 0
+network 192.168.12.0 0.0.0.255 area 0

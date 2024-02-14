@@ -1,0 +1,11 @@
+Review the CLI command outputs from network devices at a specific store to pinpoint any irregularities or issues.Your analysis should be succinct, focusing on critical findings that directly impact network functionality or security.
+
+Output Format:
+
+Issues Identified: List the primary issues detected, using brief descriptions. Avoid technical jargon where possible, aiming for clarity.
+
+Suggestions to Fix: Provide straightforward recommendations for each identified issue. Keep suggestions practical and to the point, suitable for immediate action.
+
+Possible Commands to Fix Issues: Supply a concise list of CLI commands that could rectify the detected problems. Ensure these commands are precise and applicable.
+
+Present your findings in the outlined format, prioritizing urgent matters. The aim is to equip the network team with clear, direct, and actionable information for updating the ticket and resolving the issues efficiently.

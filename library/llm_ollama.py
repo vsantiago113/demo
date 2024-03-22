@@ -11,8 +11,6 @@ module: llm_ollama
 
 short_description: An Ansible module that integrates LangChain with Ollama LLM, enabling intelligent, automated Q&A within your infrastructure tasks.
 
-# If this is part of a collection, you need to use semantic versioning,
-# i.e. the version is of the form '2.5.0' and not '2.4'.
 version_added: '1.0.0'
 
 description: This Ansible module brings a new level of intelligence to infrastructure automation by combining LangChain with Ollama LLM. Users can ask complex questions within their playbooks and receive context-aware answers, enhancing decision-making and task efficiency. Ideal for DevOps and IT professionals, this module transforms Ansible into a more adaptive and insightful tool for managing and troubleshooting infrastructure.
@@ -35,17 +33,11 @@ options:
         required: true
         type: str
 
-# Specify this value according to your collection
-# in format of namespace.collection.doc_fragment_name
-# extends_documentation_fragment:
-#     - my_namespace.my_collection.my_doc_fragment_name
-
 author:
     - Your Name (@vsantiago113)
 '''
 
 EXAMPLES = r'''
-# 
 - name: VLAN Configuration Assistant
   vsantiago113.langchain_ops.llm_ollama:
     model: llama2
@@ -60,7 +52,6 @@ EXAMPLES = r'''
 '''
 
 RETURN = r'''
-# Example of possible return value.
 message:
     description: The output message that the llm_ollama module generates.
     type: str
@@ -75,7 +66,6 @@ from langchain_core.output_parsers import StrOutputParser
 
 
 def run_module():
-    # define available arguments/parameters a user can pass to the module
     module_args = dict(
         model=dict(type='str', required=False, default='llama2'),
         temperature=dict(type='float', required=False, default=0.7),
@@ -83,33 +73,16 @@ def run_module():
         prompt=dict(type='str', required=True)
     )
 
-    # seed the result dict in the object
-    # we primarily care about changed and state
-    # changed is if this module effectively modified the target
-    # state will include any data that you want your module to pass back
-    # for consumption, for example, in a subsequent task
     result = dict(
         changed=False,
         response=''
     )
 
-    # the AnsibleModule object will be our abstraction working with Ansible
-    # this includes instantiation, a couple of common attr would be the
-    # args/params passed to the execution, as well as if the module
-    # supports check mode
     module = AnsibleModule(
         argument_spec=module_args,
         supports_check_mode=False
     )
 
-    # if the user is working with this module in only check mode we do not
-    # want to make any changes to the environment, just return the current
-    # state with no modifications
-    if module.check_mode:
-        module.exit_json(**result)
-
-    # manipulate or modify the state as needed (this is going to be the
-    # part where your module will do what it needs to do)
     llm = Ollama(model=module.params['model'], temperature=module.params['temperature'])  # TODO: Need error handling here
     prompt = ChatPromptTemplate.from_messages([
         ('system', module.params['system_message']),
@@ -121,8 +94,6 @@ def run_module():
 
     result['response'] = response
 
-    # in the event of a successful module execution, you will want to
-    # simple AnsibleModule.exit_json(), passing the key/value results
     module.exit_json(**result)
 
 

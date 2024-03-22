@@ -1,0 +1,57 @@
+---
+ansible-navigator:
+#   ansible:
+#     config:
+#       path: ./ansible.cfg
+#     inventory:
+#       entries:
+#         - host1,
+#         - router1,router2
+#         - inventory.yml
+#     playbook:
+#       # Help options for ansible-playbook command in stdout mode
+#       help: False
+#       # Specify the playbook name
+#       path: site.yml
+#   execution-environment:
+#     # Specify the container engine (auto=podman then docker)
+#     container-engine: auto
+#     # Extra parameters passed to the container engine command
+#     container-options:
+#       - "--net=host"
+#     # Enable or disable the use of an execution environment
+#     enabled: True
+#     # Specify the name of the execution environment image
+#     image: quay.io/organization/custom-ee:latest
+#     pull:
+#       # Specify any additional parameters that should be added to the pull
+#       # command when pulling an execution environment from a container
+#       # registry. e.g. --pa='--tls-verify=false'
+#       arguments:
+#         - "--tls-verify=false"
+#       # Specify the image pull policy always:Always pull the image,
+#       # missing:Pull if not locally available, never:Never pull the image,
+#       # tag:if the image tag is 'latest', always pull the image, otherwise
+#       # pull if not locally available
+#       policy: tag
+#     # Specify volume to be bind mounted within an execution environment
+#     # (--eev /home/user/test:/home/user/test:Z)
+#     volume-mounts:
+#       - src: "/tmp/directory"
+#         dest: "/tmp/directory"
+#         options: "Z"
+#   # Specify the format for stdout output.
+#   format: json
+#   images:
+#     # Provide detailed information about the selected execution environment
+#     # image
+#     details:
+#       - ansible_collections
+#       - ansible_version
+  logging:
+    level: debug
+    append: False
+    file: /dev/NULL
+#   mode: interactive
+  playbook-artifact:
+    enable: false

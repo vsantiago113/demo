@@ -92,16 +92,15 @@ output_parser = StrOutputParser()
 
 chain = prompt | llm | output_parser
 
+uploaded_file = st.file_uploader('Choose a file')
 
 user_prompt = st.text_area(label='Prompt')
-
-uploaded_file = st.file_uploader('Choose a file')
 
 if user_prompt:
     with st.spinner('Working on it...'):
         if uploaded_file is not None:
             output = document_from_file(uploaded_file.name, user_prompt)
+            st.write(output)
         else:
             output = chat(user_prompt)
-
-        st.write(output)
+            st.write(output)

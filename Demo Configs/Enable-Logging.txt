@@ -1,0 +1,10 @@
+config terminal
+logging 192.168.1.153
+service timestamps log datetime msec
+logging trap informational
+archive
+log config
+  logging enable
+  notify syslog contenttype plaintext
+end
+write memory
